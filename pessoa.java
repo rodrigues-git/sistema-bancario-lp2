@@ -1,5 +1,5 @@
 public abstract class pessoa {
-    private String nome;
+    protected String nome;
     private String cpf;
     private String endereco;
     private String telefone;
@@ -42,4 +42,6 @@ public abstract class pessoa {
     public void setTelefone(String telefone){
         this.telefone = telefone;
     }
+
+    public abstract String getDescricao();
 }
