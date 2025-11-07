@@ -32,19 +32,8 @@ public abstract class conta {
         }
     }
 
-    public void sacar(double valor){
-        if(valor <= 0){
-           System.out.println("Valor Inválido!");
-        }
-        else if(valor > saldo){
-            System.out.println("Saldo insuficiente!");
-        }
-        else{
-            saldo -= valor;
-            System.out.println("Operação Concluída");
-        }
-    }
-
+    public abstract void sacar(double valor);
+    
 }
 
    
