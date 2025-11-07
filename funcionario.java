@@ -38,4 +38,9 @@ public class funcionario extends pessoa {
     public double calcularBonificacao(){
         return salario * 0.10;
     }
+
+    @Override
+    public String getDescricao() {
+        return "Funcionário (" + cargo + ") - " + nome;
+    }
 }
