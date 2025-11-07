@@ -18,4 +18,18 @@ public class contaPoupanca extends conta{
         double i = taxaRendimento / 100;
         saldo += saldo*i; 
     }
+
+    @Override
+    public void sacar(double valor){
+        if(valor <= 0){
+           System.out.println("Valor Inválido!");
+        }
+        else if(valor > saldo){
+            System.out.println("Saldo insuficiente!");
+        }
+        else{
+            saldo -= valor;
+            System.out.println("Operação Concluída");
+        }
+    }
 }
