@@ -1,0 +1,8 @@
+*.class
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+*.log
+tmp/
