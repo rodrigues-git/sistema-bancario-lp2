@@ -1,30 +1,31 @@
-public class contaCorrente extends conta{
-    private double limite;
+public class ContaCorrente extends Conta {
+    private double limiteChequeEspecial;
 
-    public contaCorrente(int numero, double saldo, cliente titular, double limite){
+    public ContaCorrente(int numero, double saldo, Cliente titular, double limite) {
         super(numero, saldo, titular);
-        this.limite = limite;
+        this.limiteChequeEspecial = limite;
     }
 
-    public double getLimite(){
-        return limite;
+    public double getLimiteChequeEspecial() {
+        return limiteChequeEspecial;
     }
 
-    public void setLimite(double limite){
-        this.limite = limite;
+    public void setLimiteChequeEspecial(double limite) {
+        this.limiteChequeEspecial = limite;
     }
 
     @Override
-    public void sacar(double valor){
-        if(valor <= 0){
-           System.out.println("Valor Inválido!");
+    public void sacar(double valor) throws SaldoInsuficienteException, ValidacaoException {
+        if (valor <= 0) {
+            throw new ValidacaoException("O valor do saque deve ser positivo.");
         }
-        else if(valor > (saldo + limite)){
-            System.out.println("Saldo insuficiente!");
+
+        double saldoDisponivel = this.getSaldo() + this.limiteChequeEspecial;
+
+        if (valor > saldoDisponivel) {
+            throw new SaldoInsuficienteException("Saldo e limite insuficientes para este saque.");
         }
-        else{
-            saldo -= valor;
-            System.out.println("Operação Concluída");
-        }
+
+        this.setSaldo(this.getSaldo() - valor);
     }
 }

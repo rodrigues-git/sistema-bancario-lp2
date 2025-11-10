@@ -1,41 +1,44 @@
-public abstract class conta {
+public abstract class Conta {
     private int numero;
-    protected double saldo;
-    private cliente titular;
+    private double saldo;
+    private Cliente titular;
 
-    public conta(int numero, double saldo, cliente titular){
+    public Conta(int numero, double saldo, Cliente titular) {
         this.numero = numero;
         this.titular = titular;
         this.saldo = saldo;
     }
 
-    public int getNumero(){
-        return numero;
+    public int getNumero() {
+        return this.numero;
     }
 
-    public void setNumero(int numero){
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
-    public double getSaldo(){
-        return saldo;
+    public double getSaldo() {
+        return this.saldo;
     }
 
-    public void depositar(double valor){
-        if(valor > 0){
-            saldo += valor;
-            System.out.println("Operação Concluída");
-        }
-
-        else{
-            System.out.println("Valor Inválido!");
-        }
+    protected void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
 
-    public abstract void sacar(double valor);
-    
+    public Cliente getTitular() {
+        return this.titular;
+    }
+
+    public void setTitular(Cliente titular) {
+        this.titular = titular;
+    }
+
+    public void depositar(double valor) throws ValidacaoException {
+        if (valor <= 0) {
+            throw new ValidacaoException("O valor do depósito deve ser positivo.");
+        }
+        this.saldo += valor;
+    }
+
+    public abstract void sacar(double valor) throws SaldoInsuficienteException, ValidacaoException;
 }
-
-   
-
-

@@ -1,35 +1,38 @@
-public class contaPoupanca extends conta{
+public class ContaPoupanca extends Conta {
     private double taxaRendimento;
 
-    public contaPoupanca(int numero, double saldo, cliente titular, double taxaRendimento){
+    public ContaPoupanca(int numero, double saldo, Cliente titular, double taxaRendimento) {
         super(numero, saldo, titular);
         this.taxaRendimento = taxaRendimento;
     }
 
-    public double getTaxaRendimento(){
+    public double getTaxaRendimento() {
         return taxaRendimento;
     }
 
-    public void setTaxaRendimento(double taxaRendimento){
+    public void setTaxaRendimento(double taxaRendimento) {
         this.taxaRendimento = taxaRendimento;
     }
 
-    public void renderJuros(){
-        double i = taxaRendimento / 100;
-        saldo += saldo*i; 
+    public void renderJuros() throws ValidacaoException {
+        if (this.taxaRendimento <= 0) {
+            throw new ValidacaoException("Taxa de rendimento deve ser positiva para aplicar.");
+        }
+
+        double rendimento = this.getSaldo() * (this.taxaRendimento / 100);
+        this.setSaldo(this.getSaldo() + rendimento);
     }
 
     @Override
-    public void sacar(double valor){
-        if(valor <= 0){
-           System.out.println("Valor Inválido!");
+    public void sacar(double valor) throws SaldoInsuficienteException, ValidacaoException {
+        if (valor <= 0) {
+            throw new ValidacaoException("O valor do saque deve ser positivo.");
         }
-        else if(valor > saldo){
-            System.out.println("Saldo insuficiente!");
+
+        if (valor > this.getSaldo()) {
+            throw new SaldoInsuficienteException("Saldo insuficiente para este saque.");
         }
-        else{
-            saldo -= valor;
-            System.out.println("Operação Concluída");
-        }
+
+        this.setSaldo(this.getSaldo() - valor);
     }
 }
