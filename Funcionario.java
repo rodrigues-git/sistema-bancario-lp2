@@ -1,46 +1,45 @@
-public class funcionario extends pessoa {
+public class Funcionario extends Pessoa {
     private int matricula;
     private String cargo;
     private double salario;
 
-
-    public funcionario(String nome, String cpf, String endereco, String telefone, int matricula, String cargo, double salario){
+    public Funcionario(String nome, String cpf, String endereco, String telefone, int matricula, String cargo, double salario) {
         super(nome, cpf, endereco, telefone);
         this.matricula = matricula;
         this.cargo = cargo;
         this.salario = salario;
     }
 
-    public int getMatricula(){
+    public int getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula){
+    public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
 
-    public String getCargo(){
+    public String getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo){
+    public void setCargo(String cargo) {
         this.cargo = cargo;
     }
 
-    public double getSalario(){
+    public double getSalario() {
         return salario;
     }
 
-    public void setSalario(double salario){
+    public void setSalario(double salario) {
         this.salario = salario;
     }
 
-    public double calcularBonificacao(){
-        return salario * 0.10;
+    public double calcularBonificacao() {
+        return this.salario * 0.10;
     }
 
     @Override
     public String getDescricao() {
-        return "Funcionário (" + cargo + ") - " + nome;
+        return "Funcionário (" + this.cargo + ") - " + this.getNome();
     }
 }
