@@ -135,12 +135,14 @@ public class BancoService {
 
         int numero = gerarNumeroContaUnico();
         double saldoInicial = 0.0;
-        double taxaRendimentoPadrao = 0.5; // por exemplo, 0.5%
+        double taxaRendimentoPadrao = 0.5;
 
         Conta conta = new ContaPoupanca(numero, saldoInicial, cliente, taxaRendimentoPadrao);
         contas.add(conta);
         return conta;
     }
+
+
 
     public Conta buscarContaPorNumero(int numero) throws ValidacaoException {
         return contas.stream()
@@ -163,4 +165,25 @@ public class BancoService {
     public List<Conta> listarContas() {
         return contas;
     }
+
+    public void removerConta(int numeroConta) throws ValidacaoException {
+        Conta conta = buscarContaPorNumero(numeroConta);
+
+        if (conta.getSaldo() > 0) {
+            throw new ValidacaoException("Não é possível remover a conta. Saldo precisa ser 0.");
+        }
+
+        // Remove a conta da lista geral do banco
+        contas.remove(conta);
+
+        // Remove a conta da lista interna do cliente
+        Cliente titular = conta.getTitular();
+        if (titular != null && titular.getContas() != null) {
+            titular.getContas().remove(conta);
+        }
+
+        // Libera o número da conta para ser usado novamente
+        numerosUsados.remove(conta.getNumero());
+    }
 }
+
