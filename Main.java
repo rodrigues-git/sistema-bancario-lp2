@@ -16,6 +16,7 @@ public class Main {
             System.out.println("6. Listar Clientes e Contas");
             System.out.println("7. Aplicar Rendimento (Poupança)");
             System.out.println("8. Consultar Saldo da Conta");
+            System.out.println("9. Remover Conta");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -167,6 +168,31 @@ public class Main {
                             throw new ValidacaoException("Essa conta não é do tipo poupança.");
                         }
                     }
+                    // ==================== CONSULTAR SALDO DA CONTA ====================
+                    case 8 -> {
+                        System.out.print("Número da conta (4 dígitos): ");
+                        int numero = scanner.nextInt();
+                        var conta = banco.buscarContaPorNumero(numero);
+
+                        System.out.printf(" Saldo da conta %04d: R$ %.2f%n", conta.getNumero(), conta.getSaldo());
+                    }
+                    // ==================== DELETAR CONTA ====================
+                    case 9 -> {
+                        System.out.print("Número da conta a ser removida (4 dígitos): ");
+                        int numero = scanner.nextInt();
+
+                        scanner.nextLine(); // limpar buffer
+                        System.out.print("Tem certeza que deseja remover a conta " + numero + "? (S/N): ");
+                        String confirmacao = scanner.nextLine().trim().toUpperCase();
+
+                        if (confirmacao.equals("S")) {
+                            banco.removerConta(numero);
+                            System.out.println(" Conta removida com sucesso!");
+                        } else {
+                            System.out.println(" Operação cancelada.");
+                        }
+                    }
+
 
                     // ==================== SAIR ====================
                     case 0 -> {
