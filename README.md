@@ -1,4 +1,4 @@
-# Projeto: Sistema Bancário (Programação Orientada a Objetos - Unidade II)
+# Projeto: Sistema Bancário (LP2 - Unidade II)
 
 Este projeto implementa um sistema bancário básico via console, focado em aplicar os conceitos fundamentais da Programação Orientada a Objetos (POO), conforme especificado na disciplina do Professor Jerffeson Gomes Dutra.
 
