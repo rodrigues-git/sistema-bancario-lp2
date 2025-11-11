@@ -42,11 +42,13 @@ class Conta {
 
 class ContaCorrente {
 -double limiteChequeEspecial
++setLimiteChequeEspecial(double) void
 +sacar(double) void
 }
 
 class ContaPoupanca {
 -double taxaRendimento
++setTaxaRendimento(double) void
 +renderJuros() void
 +sacar(double) void
 }
@@ -74,14 +76,21 @@ class BancoService {
 +atualizarDadosCliente(String...) void
 +listarClientes() List~Cliente~
 +cadastrarFuncionario(String...) Funcionario
++buscarFuncionarioPorCpf(String) Funcionario
++buscarFuncionarioPorMatricula(int) Funcionario
 +removerFuncionario(String) void
++atualizarDadosFuncionario(String...) void
++listarFuncionarios() List~Funcionario~
 +criarContaCorrente(String, double) Conta
 +criarContaPoupanca(String) Conta
 +buscarContaPorNumero(int) Conta
-+realizarSaque(int, double) void
-+realizarDeposito(int, double) void
++atualizarLimiteContaCorrente(int, double) void
++atualizarTaxaPoupanca(int, double) void
 +listarContas() List~Conta~
 +removerConta(int) void
++realizarDeposito(int, double) void
++realizarSaque(int, double) void
++realizarTransferencia(int, int, double) void
 }
 
 class Main {
